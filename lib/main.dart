@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sharing_housework/features/housework/presentation/pages/create_task_page.dart';
+import 'package:sharing_housework/features/housework/presentation/widgets/google_sign_in_button.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,16 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
-        '/tasks/new': (context) => const CreateTaskPage(),
-      }
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
+          '/tasks/new': (context) => const CreateTaskPage(),
+        });
   }
 }
 
@@ -42,29 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void initializeFlutterFire() async {
     try {
       await Firebase.initializeApp();
-      setState(() {
-      });
-    } catch(e) {
-      setState(() {
-      });
+      setState(() {});
+    } catch (e) {
+      setState(() {});
     }
-  }
-
-  Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
-
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   void _incrementCounter() {
@@ -76,7 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     initializeFlutterFire();
-    signInWithGoogle();
     super.initState();
   }
 
@@ -91,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             GestureDetector(
-              onTap: ()  {
+              onTap: () {
                 Navigator.pushNamed(context, '/tasks/new');
               },
               child: const Text('Create new task'),
@@ -103,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            const GoogleSignInButton()
           ],
         ),
       ),

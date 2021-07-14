@@ -15,6 +15,5 @@ class CreateTaskPage extends StatelessWidget {
     );
   }
 
-  buildBody(BuildContext context) {
-  }
+  buildBody(BuildContext context) {}
 }

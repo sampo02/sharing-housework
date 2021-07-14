@@ -3,7 +3,6 @@ abstract class TaskRemoteDataSource {
 }
 
 class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
-
   @override
   Future<void> storeTask() {
     throw UnimplementedError();
