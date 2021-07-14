@@ -44,7 +44,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-# Secrets
-ios/GoogleService-Info.plist
-ios/Runner/Info.plist
