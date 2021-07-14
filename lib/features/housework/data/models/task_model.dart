@@ -1,4 +1,4 @@
-import 'package:sharing_housework/features/task/domain/entities/task.dart';
+import 'package:sharing_housework/features/housework/domain/entities/task.dart';
 
 class TaskModel extends Task {
   TaskModel({

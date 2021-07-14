@@ -1,4 +1,4 @@
-import 'package:sharing_housework/features/task/domain/repositories/task_repository.dart';
+import 'package:sharing_housework/features/housework/domain/repositories/task_repository.dart';
 
 class TaskRepositoryImpl implements TaskRepository {
 
