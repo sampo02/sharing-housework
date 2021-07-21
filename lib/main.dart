@@ -2,9 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sharing_housework/features/housework/presentation/pages/create_task_page.dart';
 import 'package:sharing_housework/features/housework/presentation/widgets/google_sign_in_button.dart';
+import 'package:sharing_housework/injection.dart' as di;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(const MyApp());
 }
 
