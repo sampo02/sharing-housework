@@ -1,5 +1,7 @@
+import 'package:sharing_housework/features/housework/domain/values/name.dart';
+
 class Task {
-  String name;
+  Name name;
 
   Task({required this.name});
 }
