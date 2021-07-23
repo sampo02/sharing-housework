@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sharing_housework/features/housework/presentation/widgets/create_task_button.dart';
+import 'package:sharing_housework/features/housework/presentation/widgets/fetch_tasks_button.dart';
 
 class CreateTaskPage extends StatelessWidget {
   const CreateTaskPage({Key? key}) : super(key: key);
@@ -10,8 +11,13 @@ class CreateTaskPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('New Task'),
       ),
-      body: const SingleChildScrollView(
-        child: CreateTaskButton(),
+      body: Center(
+        child: Column(
+          children: const <Widget>[
+            CreateTaskButton(),
+            FetchTasksButton(),
+          ],
+        ),
       ),
     );
   }
