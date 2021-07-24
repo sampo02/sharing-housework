@@ -1,7 +1,7 @@
-import 'package:sharing_housework/features/housework/domain/values/name.dart';
+import 'package:sharing_housework/features/housework/domain/values/task_title.dart';
 
 class Task {
-  Name name;
+  TaskTitle title;
 
-  Task({required this.name});
+  Task({required this.title});
 }

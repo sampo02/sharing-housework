@@ -11,7 +11,8 @@ class TaskList extends StatelessWidget {
       return ListView.builder(
           itemCount: task.items.length,
           itemBuilder: (BuildContext context, int index) {
-            return Center(child: Text('Task name: ${task.items[index].name}'));
+            return Center(
+                child: Text('Task title: ${task.items[index].title}'));
           });
     });
   }

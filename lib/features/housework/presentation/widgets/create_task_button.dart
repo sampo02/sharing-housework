@@ -12,7 +12,7 @@ class CreateTaskButton extends StatelessWidget {
         children: <Widget>[
           TextButton(
             onPressed: () {
-              task.create('New Task');
+              task.create();
             },
             child: const Text('Add New Task'),
           )

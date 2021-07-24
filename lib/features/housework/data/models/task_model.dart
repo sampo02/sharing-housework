@@ -1,14 +1,10 @@
 import 'package:sharing_housework/features/housework/domain/entities/task.dart';
-import 'package:sharing_housework/features/housework/domain/values/name.dart';
+import 'package:sharing_housework/features/housework/domain/values/task_title.dart';
 
 class TaskModel extends Task {
-  TaskModel({required Name name}) : super(name: name);
+  TaskModel({required TaskTitle title}) : super(title: title);
 
   factory TaskModel.fromData(Map<String, dynamic> data) {
-    return TaskModel(name: Name(data['name']));
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'name': name};
+    return TaskModel(title: TaskTitle(data['title'] ?? ''));
   }
 }
