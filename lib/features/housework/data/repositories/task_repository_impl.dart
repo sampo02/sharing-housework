@@ -1,5 +1,4 @@
 import 'package:sharing_housework/features/housework/data/datasources/task_remote_data_source.dart';
-import 'package:sharing_housework/features/housework/data/models/task_model.dart';
 import 'package:sharing_housework/features/housework/domain/entities/task.dart';
 import 'package:sharing_housework/features/housework/domain/repositories/task_repository.dart';
 
@@ -11,7 +10,7 @@ class TaskRepositoryImpl implements TaskRepository {
   });
 
   @override
-  Future<List<TaskModel>> list() {
+  Future<List<Task>> list() {
     return remoteDataSource.listTasks();
   }
 

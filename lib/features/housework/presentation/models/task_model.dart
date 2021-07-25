@@ -5,8 +5,10 @@ import 'package:sharing_housework/features/housework/domain/usecases/create_task
 import 'package:sharing_housework/features/housework/domain/usecases/fetch_tasks_usecase.dart';
 
 class TaskModel extends ChangeNotifier {
-  final FetchTasksUsecase fetchTasksUsecase;
-  final CreateTaskUsecase createTaskUsecase;
+  final FetchTasksUsecase fetchUsecase;
+  final CreateTaskUsecase createUsecase;
+
+  TaskModel({required this.createUsecase, required this.fetchUsecase});
 
   var title = '';
   String? titleError;
@@ -15,10 +17,8 @@ class TaskModel extends ChangeNotifier {
 
   UnmodifiableListView<TaskViewModel> get items => UnmodifiableListView(_items);
 
-  TaskModel(this.fetchTasksUsecase, this.createTaskUsecase);
-
   Future<void> fetch() async {
-    final data = await fetchTasksUsecase();
+    final data = await fetchUsecase();
     _items.clear();
     _items.addAll(data.map((e) => TaskViewModel(e.title.toString())));
     notifyListeners();
@@ -26,7 +26,7 @@ class TaskModel extends ChangeNotifier {
 
   Future<void> create() async {
     try {
-      await createTaskUsecase(title);
+      await createUsecase(title);
     } catch (e) {
       if (e is TaskTitleShouldNotBeEmptyException) {
         titleError = 'Task title is required';

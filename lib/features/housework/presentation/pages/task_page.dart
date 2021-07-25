@@ -7,14 +7,14 @@ import 'package:sharing_housework/features/housework/presentation/widgets/task_f
 import 'package:sharing_housework/features/housework/presentation/widgets/task_list.dart';
 import 'package:sharing_housework/injection.dart';
 
-class CreateTaskPage extends StatelessWidget {
-  const CreateTaskPage({Key? key}) : super(key: key);
+class TaskPage extends StatelessWidget {
+  const TaskPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Task'),
+        title: const Text('Tasks'),
       ),
       body: ChangeNotifierProvider(
         create: (context) => instance<TaskModel>(),

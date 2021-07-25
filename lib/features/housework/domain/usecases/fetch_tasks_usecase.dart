@@ -1,4 +1,4 @@
-import 'package:sharing_housework/features/housework/data/models/task_model.dart';
+import 'package:sharing_housework/features/housework/domain/entities/task.dart';
 import 'package:sharing_housework/features/housework/domain/repositories/task_repository.dart';
 
 class FetchTasksUsecase {
@@ -6,7 +6,7 @@ class FetchTasksUsecase {
 
   FetchTasksUsecase(this.repository);
 
-  Future<List<TaskModel>> call() async {
+  Future<List<Task>> call() async {
     return repository.list();
   }
 }
