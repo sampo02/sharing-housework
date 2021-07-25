@@ -6,8 +6,21 @@ class UserModel extends ChangeNotifier {
 
   UserModel({required this.signInGoogleUsecase});
 
+  var _displayName = '';
+  var _email = '';
+  var _photoUrl = '';
+
+  String get displayName => _displayName;
+  String get email => _email;
+  String get photoUrl => _photoUrl;
+
   Future<void> signInGoogle() async {
-    await signInGoogleUsecase();
+    final data = await signInGoogleUsecase();
+
+    _displayName = data.displayName;
+    _email = data.email;
+    _photoUrl = data.photoUrl;
+
     notifyListeners();
   }
 }

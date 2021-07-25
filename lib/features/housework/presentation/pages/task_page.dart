@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sharing_housework/features/housework/presentation/models/task_model.dart';
 import 'package:sharing_housework/features/housework/presentation/widgets/create_task_button.dart';
 import 'package:sharing_housework/features/housework/presentation/widgets/fetch_tasks_button.dart';
 import 'package:sharing_housework/features/housework/presentation/widgets/task_form.dart';
 import 'package:sharing_housework/features/housework/presentation/widgets/task_list.dart';
-import 'package:sharing_housework/injection.dart';
 
 class TaskPage extends StatelessWidget {
   const TaskPage({Key? key}) : super(key: key);
@@ -16,18 +13,15 @@ class TaskPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Tasks'),
       ),
-      body: ChangeNotifierProvider(
-        create: (context) => instance<TaskModel>(),
-        child: Center(
-            child: Column(
-          children: const <Widget>[
-            Expanded(child: TaskForm()),
-            CreateTaskButton(),
-            FetchTasksButton(),
-            Expanded(child: TaskList())
-          ],
-        )),
-      ),
+      body: Center(
+          child: Column(
+        children: const <Widget>[
+          Expanded(child: TaskForm()),
+          CreateTaskButton(),
+          FetchTasksButton(),
+          Expanded(child: TaskList())
+        ],
+      )),
     );
   }
 }
