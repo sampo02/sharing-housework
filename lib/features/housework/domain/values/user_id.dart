@@ -1,20 +1,25 @@
 import 'package:sharing_housework/features/housework/core/exceptions/exception.dart';
 
-class TaskTitle {
+class UserId {
   final String value;
 
-  factory TaskTitle(String input) {
-    return TaskTitle._(
+  factory UserId(String input) {
+    return UserId._(
       validate(input),
     );
   }
 
-  const TaskTitle._(this.value);
+  const UserId._(this.value);
+
+  bool equals(UserId id) {
+    return this == id;
+  }
 }
 
 String validate(String value) {
   if (value.isEmpty) {
-    throw TaskTitleShouldNotBeEmptyException();
+    throw UserIdShouldNotBeEmptyException();
   }
+
   return value;
 }

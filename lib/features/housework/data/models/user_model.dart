@@ -1,11 +1,17 @@
 import 'package:sharing_housework/features/housework/domain/entities/user.dart';
+import 'package:sharing_housework/features/housework/domain/values/user_id.dart';
 
 class UserModel extends User {
-  UserModel({required displayName, required email, required photoUrl})
-      : super(displayName: displayName, email: email, photoUrl: photoUrl);
+  UserModel(
+      {required id, required displayName, required email, required photoUrl})
+      : super(
+            id: id, displayName: displayName, email: email, photoUrl: photoUrl);
 
-  factory UserModel.fromData(displayName, email, photoUrl) {
+  factory UserModel.fromData(String id, Map<String, dynamic> data) {
     return UserModel(
-        displayName: displayName, email: email, photoUrl: photoUrl);
+        id: UserId(id),
+        displayName: data['displayName'],
+        email: data['email'],
+        photoUrl: data['photoUrl']);
   }
 }

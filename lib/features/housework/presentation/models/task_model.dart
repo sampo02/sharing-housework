@@ -20,17 +20,15 @@ class TaskModel extends ChangeNotifier {
   Future<void> fetch() async {
     final data = await fetchUsecase();
     _items.clear();
-    _items.addAll(data.map((e) => TaskViewModel(e.title.toString())));
+    _items.addAll(data.map((e) => TaskViewModel(e.title.value)));
     notifyListeners();
   }
 
   Future<void> create() async {
     try {
       await createUsecase(title);
-    } catch (e) {
-      if (e is TaskTitleShouldNotBeEmptyException) {
-        titleError = 'Task title is required';
-      }
+    } on TaskTitleShouldNotBeEmptyException catch (_) {
+      titleError = 'Task title is required';
     }
     await fetch();
     notifyListeners();
