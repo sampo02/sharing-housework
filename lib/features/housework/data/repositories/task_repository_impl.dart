@@ -11,11 +11,11 @@ class TaskRepositoryImpl implements TaskRepository {
 
   @override
   Future<List<Task>> list() {
-    return remoteDataSource.listTasks();
+    return remoteDataSource.list();
   }
 
   @override
   Future<void> store(Task task) {
-    return remoteDataSource.storeTask(task);
+    return remoteDataSource.store(task);
   }
 }

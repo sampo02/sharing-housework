@@ -1,5 +1,5 @@
-class TaskTitleShouldNotBeEmptyException implements Exception {
-  final String failedValue;
+class SignInDialogCanceledException implements Exception {}
 
-  TaskTitleShouldNotBeEmptyException({required this.failedValue});
-}
+class TaskTitleShouldNotBeEmptyException implements Exception {}
+
+class UserIdShouldNotBeEmptyException implements Exception {}

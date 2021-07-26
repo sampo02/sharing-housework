@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:sharing_housework/features/housework/core/exceptions/exception.dart';
 import 'package:sharing_housework/features/housework/presentation/models/user_model.dart';
 
 class SignInGoogleButton extends StatelessWidget {
@@ -12,8 +13,15 @@ class SignInGoogleButton extends StatelessWidget {
       return Column(
         children: <Widget>[
           ElevatedButton.icon(
-              onPressed: () {
-                user.signInGoogle();
+              onPressed: () async {
+                {
+                  try {
+                    await user.signInGoogle();
+                    Navigator.pushNamed(context, '/');
+                  } on SignInDialogCanceledException {
+                    // just close the sign in dialog
+                  }
+                }
               },
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.black),

@@ -1,10 +1,13 @@
 import 'package:get_it/get_it.dart';
 import 'package:sharing_housework/features/housework/data/datasources/auth_remote_data_source.dart';
 import 'package:sharing_housework/features/housework/data/datasources/task_remote_data_source.dart';
+import 'package:sharing_housework/features/housework/data/datasources/user_remote_data_source.dart';
 import 'package:sharing_housework/features/housework/data/repositories/auth_repository_impl.dart';
 import 'package:sharing_housework/features/housework/data/repositories/task_repository_impl.dart';
+import 'package:sharing_housework/features/housework/data/repositories/user_repository_impl.dart';
 import 'package:sharing_housework/features/housework/domain/repositories/auth_repository.dart';
 import 'package:sharing_housework/features/housework/domain/repositories/task_repository.dart';
+import 'package:sharing_housework/features/housework/domain/repositories/user_repository.dart';
 import 'package:sharing_housework/features/housework/domain/usecases/create_task_usecase.dart';
 import 'package:sharing_housework/features/housework/domain/usecases/fetch_tasks_usecase.dart';
 import 'package:sharing_housework/features/housework/domain/usecases/sign_in_google_usecase.dart';
@@ -20,15 +23,20 @@ Future<void> init() async {
 
   instance.registerLazySingleton(() => FetchTasksUsecase(instance()));
   instance.registerLazySingleton(() => CreateTaskUsecase(instance()));
-  instance.registerLazySingleton(() => SignInGoogleUsecase(instance()));
+  instance.registerLazySingleton(() =>
+      SignInGoogleUsecase(repository: instance(), userRepository: instance()));
 
   instance.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(remoteDataSource: instance()));
+  instance.registerLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(remoteDataSource: instance()));
   instance.registerLazySingleton<TaskRepository>(
       () => TaskRepositoryImpl(remoteDataSource: instance()));
 
   instance.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl());
+  instance.registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSourceImpl());
   instance.registerLazySingleton<TaskRemoteDataSource>(
       () => TaskRemoteDataSourceImpl());
 }
