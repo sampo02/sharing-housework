@@ -22,14 +22,13 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> store(User user) {
-    return users
-        .doc(user.id.value)
-        .set({
-          'displayName': user.displayName,
-          'email': user.email,
-          'photoUrl': user.photoUrl
-        })
-        .then((_) => (_))
-        .catchError((_) => (_));
+    return users.doc(user.id.value).set({
+      'displayName': user.displayName,
+      'email': user.email,
+      'photoUrl': user.photoUrl,
+      'teamIds': user.teamIds
+          .map((t) => FirebaseFirestore.instance.doc("teams/${t.value}"))
+          .toList()
+    });
   }
 }

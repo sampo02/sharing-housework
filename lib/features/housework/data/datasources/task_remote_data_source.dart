@@ -20,9 +20,6 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
 
   @override
   Future<void> store(Task task) {
-    return tasks
-        .add({'title': task.title.value})
-        .then((_) => (_))
-        .catchError((_) => (_));
+    return tasks.add({'title': task.title.value}).then((_) => (_));
   }
 }

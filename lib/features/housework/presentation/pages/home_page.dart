@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sharing_housework/features/housework/presentation/widgets/debug_firestore_button.dart';
 import 'package:sharing_housework/features/housework/presentation/widgets/user_icon.dart';
 
 class HomePage extends StatelessWidget {
@@ -28,6 +29,7 @@ class HomePage extends StatelessWidget {
                   Navigator.pushNamed(context, '/tasks');
                 },
                 child: const Text('Tasks')),
+            const DebugFirestoreButton(),
           ],
         ),
       ),

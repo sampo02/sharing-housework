@@ -1,24 +1,24 @@
 import 'package:sharing_housework/features/housework/core/exceptions/exception.dart';
 
-class UserId {
+class TeamId {
   final String value;
 
-  factory UserId(String value) {
-    return UserId._(
+  factory TeamId(String value) {
+    return TeamId._(
       validate(value),
     );
   }
 
-  const UserId._(this.value);
+  const TeamId._(this.value);
 
-  bool equals(UserId id) {
+  bool equals(TeamId id) {
     return this == id;
   }
 }
 
 String validate(String value) {
   if (value.isEmpty) {
-    throw UserIdShouldNotBeEmptyException();
+    throw TeamIdShouldNotBeEmptyException();
   }
 
   return value;

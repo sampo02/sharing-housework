@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +14,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   await Firebase.initializeApp();
+
+  const isEmulator = bool.fromEnvironment('IS_EMULATOR');
+  if (isEmulator) {
+    const localhost = 'localhost';
+    FirebaseFirestore.instance.useFirestoreEmulator(localhost, 8080);
+    await FirebaseAuth.instance.useAuthEmulator(localhost, 9099);
+  }
+
   runApp(
     MultiProvider(
       providers: [

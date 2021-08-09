@@ -31,6 +31,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         id: UserId(user.uid),
         displayName: user.displayName,
         email: user.email,
-        photoUrl: user.photoURL);
+        photoUrl: user.photoURL,
+        teamIds: List.empty());
   }
 }
