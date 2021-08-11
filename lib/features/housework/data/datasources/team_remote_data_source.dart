@@ -18,7 +18,6 @@ class TeamRemoteDataSourceImpl implements TeamRemoteDataSource {
   @override
   Future<TeamId> store(NewTeam team) async {
     final doc = await teamsRef.add(TeamModel(
-        tasks: [],
         memberIds: team.members.map((m) => 'users/${m.id.value}').toList(),
         members: team.members
             .map((m) => TeamUserModel(

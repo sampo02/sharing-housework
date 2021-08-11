@@ -1,5 +1,6 @@
 import 'package:sharing_housework/features/housework/domain/entities/task.dart';
 import 'package:sharing_housework/features/housework/domain/entities/team_user.dart';
+import 'package:sharing_housework/features/housework/domain/values/team_id.dart';
 
 class NewTeam {
   List<Task> tasks;
@@ -13,7 +14,7 @@ class NewTeam {
 }
 
 class Team extends NewTeam {
-  String id;
+  TeamId id;
 
   Team({required this.id, required tasks, required members})
       : super(tasks: tasks, members: members);

@@ -3,4 +3,6 @@ import 'package:sharing_housework/features/housework/domain/values/team_id.dart'
 
 abstract class TeamRepository {
   Future<TeamId> store(NewTeam team);
+  Future<TeamId> current();
+  Future<void> setCurrent(TeamId id);
 }

@@ -24,7 +24,7 @@ class User {
   }
 
   bool notSaved(User? user) {
-    return !equals(user);
+    return user == null;
   }
 
   bool equals(User? user) {

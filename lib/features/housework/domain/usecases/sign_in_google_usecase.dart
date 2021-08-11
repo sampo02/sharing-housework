@@ -29,6 +29,8 @@ class SignInGoogleUsecase {
       final newTeamId = await teamRepository.store(newTeam);
       newUser.join(newTeamId);
       await userRepository.store(newUser);
+
+      await teamRepository.setCurrent(newTeamId);
     }
 
     return newUser;

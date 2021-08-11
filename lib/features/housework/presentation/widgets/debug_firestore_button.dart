@@ -7,9 +7,10 @@ class DebugFirestoreButton extends StatelessWidget {
   _call() async {
     await FirebaseFirestore.instance
         .collection('teams')
-        .doc('aMYhOr69DeezZaauo6Rm')
+        .doc('ICEvc6e5zZOaaXnuvxto')
+        .collection('tasks')
         .get();
-    // print(res.data());
+    // print(res.docs.map((e) => e['title']));
   }
 
   @override

@@ -17,6 +17,8 @@ import 'package:sharing_housework/features/housework/domain/usecases/sign_in_goo
 import 'package:sharing_housework/features/housework/presentation/models/task_model.dart';
 import 'package:sharing_housework/features/housework/presentation/models/user_model.dart';
 
+import 'features/housework/data/datasources/team_local_data_source.dart';
+
 final instance = GetIt.instance;
 
 Future<void> init() async {
@@ -24,8 +26,10 @@ Future<void> init() async {
       () => TaskModel(createUsecase: instance(), fetchUsecase: instance()));
   instance.registerFactory(() => UserModel(signInGoogleUsecase: instance()));
 
-  instance.registerLazySingleton(() => FetchTasksUsecase(instance()));
-  instance.registerLazySingleton(() => CreateTaskUsecase(instance()));
+  instance
+      .registerLazySingleton(() => FetchTasksUsecase(instance(), instance()));
+  instance
+      .registerLazySingleton(() => CreateTaskUsecase(instance(), instance()));
   instance.registerLazySingleton(() => SignInGoogleUsecase(
       repository: instance(),
       teamRepository: instance(),
@@ -35,8 +39,8 @@ Future<void> init() async {
       () => AuthRepositoryImpl(remoteDataSource: instance()));
   instance.registerLazySingleton<UserRepository>(
       () => UserRepositoryImpl(remoteDataSource: instance()));
-  instance.registerLazySingleton<TeamRepository>(
-      () => TeamRepositoryImpl(remoteDataSource: instance()));
+  instance.registerLazySingleton<TeamRepository>(() => TeamRepositoryImpl(
+      remoteDataSource: instance(), localDataSource: instance()));
   instance.registerLazySingleton<TaskRepository>(
       () => TaskRepositoryImpl(remoteDataSource: instance()));
 
@@ -46,6 +50,8 @@ Future<void> init() async {
       () => UserRemoteDataSourceImpl());
   instance.registerLazySingleton<TeamRemoteDataSource>(
       () => TeamRemoteDataSourceImpl());
+  instance.registerLazySingleton<TeamLocalDataSource>(
+      () => TeamLocalDataSourceImpl());
   instance.registerLazySingleton<TaskRemoteDataSource>(
       () => TaskRemoteDataSourceImpl());
 }
