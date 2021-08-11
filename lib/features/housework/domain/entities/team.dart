@@ -1,21 +1,18 @@
-import 'package:sharing_housework/features/housework/domain/entities/task.dart';
-import 'package:sharing_housework/features/housework/domain/entities/team_user.dart';
 import 'package:sharing_housework/features/housework/domain/values/team_id.dart';
+import 'package:sharing_housework/features/housework/domain/values/user_id.dart';
 
 class NewTeam {
-  List<Task> tasks;
-  List<TeamUser> members;
+  List<UserId> memberIds;
 
-  NewTeam({required this.tasks, required this.members});
+  NewTeam({required this.memberIds});
 
-  void assign(TeamUser member) {
-    members.add(member);
+  void assign(UserId memberId) {
+    memberIds.add(memberId);
   }
 }
 
 class Team extends NewTeam {
   TeamId id;
 
-  Team({required this.id, required tasks, required members})
-      : super(tasks: tasks, members: members);
+  Team({required this.id, required memberIds}) : super(memberIds: memberIds);
 }

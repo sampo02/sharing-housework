@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sharing_housework/features/housework/data/models/team_model.dart';
-import 'package:sharing_housework/features/housework/data/models/team_user_model.dart';
 import 'package:sharing_housework/features/housework/domain/entities/team.dart';
 import 'package:sharing_housework/features/housework/domain/values/team_id.dart';
 
@@ -18,14 +17,7 @@ class TeamRemoteDataSourceImpl implements TeamRemoteDataSource {
   @override
   Future<TeamId> store(NewTeam team) async {
     final doc = await teamsRef.add(TeamModel(
-        memberIds: team.members.map((m) => 'users/${m.id.value}').toList(),
-        members: team.members
-            .map((m) => TeamUserModel(
-                  id: m.id,
-                  displayName: m.displayName,
-                  photoUrl: m.photoUrl,
-                ))
-            .toList()));
+        memberIds: team.memberIds.map((id) => 'users/${id.value}').toList()));
     return TeamId(doc.id);
   }
 }
