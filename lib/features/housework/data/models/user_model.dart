@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sharing_housework/features/housework/domain/entities/user.dart';
 import 'package:sharing_housework/features/housework/domain/values/team_id.dart';
 import 'package:sharing_housework/features/housework/domain/values/user_id.dart';
@@ -22,6 +23,9 @@ class UserModel extends User {
         displayName: data['displayName'],
         email: data['email'],
         photoUrl: data['photoUrl'],
-        teamIds: []);
+        teamIds: (data['teamIds'] as List)
+            .map((e) =>
+                TeamId((e as DocumentReference).id.replaceAll("teams/", "")))
+            .toList());
   }
 }
