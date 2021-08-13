@@ -39,6 +39,9 @@ class SignInGoogleUsecase {
               photoUrl: newUser.photoUrl));
 
       await teamRepository.setCurrent(newTeamId);
+    } else {
+      final teamId = maybeStoredUser!.teamIds.first;
+      await teamRepository.setCurrent(teamId);
     }
 
     return newUser;
