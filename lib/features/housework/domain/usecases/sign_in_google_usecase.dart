@@ -1,3 +1,4 @@
+import 'package:sharing_housework/features/housework/core/exceptions/exception.dart';
 import 'package:sharing_housework/features/housework/domain/entities/member.dart';
 import 'package:sharing_housework/features/housework/domain/entities/team.dart';
 import 'package:sharing_housework/features/housework/domain/entities/user.dart';
@@ -21,6 +22,9 @@ class SignInGoogleUsecase {
 
   Future<User> call() async {
     final newUser = await repository.googleSignIn();
+    if (newUser == null) {
+      throw GoogleSignInShouldReturnUserException();
+    }
 
     final maybeStoredUser = await userRepository.findBy(newUser.id);
     if (newUser.notSaved(maybeStoredUser)) {

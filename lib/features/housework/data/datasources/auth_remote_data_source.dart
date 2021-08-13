@@ -5,12 +5,12 @@ import 'package:sharing_housework/features/housework/data/models/user_model.dart
 import 'package:sharing_housework/features/housework/domain/values/user_id.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<UserModel> signInGoogle();
+  Future<UserModel?> signInGoogle();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
-  Future<UserModel> signInGoogle() async {
+  Future<UserModel?> signInGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     if (googleUser == null) {
@@ -26,7 +26,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
 
     final data = await FirebaseAuth.instance.signInWithCredential(credential);
-    final user = data.user!;
+    final user = data.user;
+
+    if (user == null) {
+      return null;
+    }
     return UserModel(
         id: UserId(user.uid),
         displayName: user.displayName,

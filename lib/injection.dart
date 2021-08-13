@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:sharing_housework/features/housework/data/datasources/auth_local_data_source.dart';
 import 'package:sharing_housework/features/housework/data/datasources/auth_remote_data_source.dart';
 import 'package:sharing_housework/features/housework/data/datasources/member_remote_data_source.dart';
 import 'package:sharing_housework/features/housework/data/datasources/task_remote_data_source.dart';
@@ -17,6 +18,7 @@ import 'package:sharing_housework/features/housework/domain/repositories/team_re
 import 'package:sharing_housework/features/housework/domain/repositories/user_repository.dart';
 import 'package:sharing_housework/features/housework/domain/usecases/create_task_usecase.dart';
 import 'package:sharing_housework/features/housework/domain/usecases/fetch_tasks_usecase.dart';
+import 'package:sharing_housework/features/housework/domain/usecases/get_current_user_usecase.dart';
 import 'package:sharing_housework/features/housework/domain/usecases/sign_in_google_usecase.dart';
 import 'package:sharing_housework/features/housework/presentation/models/task_model.dart';
 import 'package:sharing_housework/features/housework/presentation/models/user_model.dart';
@@ -26,20 +28,22 @@ final instance = GetIt.instance;
 Future<void> init() async {
   instance.registerFactory(
       () => TaskModel(createUsecase: instance(), fetchUsecase: instance()));
-  instance.registerFactory(() => UserModel(signInGoogleUsecase: instance()));
+  instance.registerFactory(() => UserModel(
+      getCurrentUserUsecase: instance(), signInGoogleUsecase: instance()));
 
   instance
       .registerLazySingleton(() => FetchTasksUsecase(instance(), instance()));
   instance
       .registerLazySingleton(() => CreateTaskUsecase(instance(), instance()));
+  instance.registerLazySingleton(() => GetCurrentUserUsecase(instance()));
   instance.registerLazySingleton(() => SignInGoogleUsecase(
       repository: instance(),
       teamRepository: instance(),
       userRepository: instance(),
       memberRepository: instance()));
 
-  instance.registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryImpl(remoteDataSource: instance()));
+  instance.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
+      localDataSource: instance(), remoteDataSource: instance()));
   instance.registerLazySingleton<MemberRepository>(
       () => MemberRepositoryImpl(remoteDataSource: instance()));
   instance.registerLazySingleton<UserRepository>(
@@ -49,6 +53,8 @@ Future<void> init() async {
   instance.registerLazySingleton<TaskRepository>(
       () => TaskRepositoryImpl(remoteDataSource: instance()));
 
+  instance.registerLazySingleton<AuthLocalDataSource>(
+      () => AuthLocalDataSourceImpl());
   instance.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl());
   instance.registerLazySingleton<MemberRemoteDataSource>(
