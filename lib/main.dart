@@ -4,10 +4,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sharing_housework/features/housework/presentation/models/task_model.dart';
+import 'package:sharing_housework/features/housework/presentation/models/team_model.dart';
 import 'package:sharing_housework/features/housework/presentation/models/user_model.dart';
 import 'package:sharing_housework/features/housework/presentation/pages/home_page.dart';
 import 'package:sharing_housework/features/housework/presentation/pages/sign_in_page.dart';
 import 'package:sharing_housework/features/housework/presentation/pages/task_page.dart';
+import 'package:sharing_housework/features/housework/presentation/widgets/lifecycle_manager.dart';
 import 'package:sharing_housework/injection.dart' as di;
 
 void main() async {
@@ -26,6 +28,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => di.instance<TaskModel>()),
+        ChangeNotifierProvider(create: (context) => di.instance<TeamModel>()),
         ChangeNotifierProvider(create: (context) => di.instance<UserModel>()),
       ],
       child: const MyApp(),
@@ -38,16 +41,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Sharing Housework',
-        theme: ThemeData(
-          primarySwatch: Colors.grey,
-        ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const HomePage(),
-          '/sign_in': (context) => const SignInPage(),
-          '/tasks': (context) => const TaskPage(),
-        });
+    return LifecycleManager(
+      child: MaterialApp(
+          title: 'Sharing Housework',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const HomePage(),
+            '/sign_in': (context) => const SignInPage(),
+            '/tasks': (context) => const TaskPage(),
+          }),
+      user: di.instance<UserModel>(),
+    );
   }
 }
